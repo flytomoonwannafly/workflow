@@ -7,14 +7,14 @@ Feature: Sign
 
   Scenario: try Sign (success flow)
     Given I am on the sign page
-    When I enters "volferss" in the "login" field
+    When I enters "volferme" in the "login" field
     And I enters "volf" in the "password" field
     And I clicks the "Зареєструватись" button
     Then Me must see "Ви успішно зареєструвались" on the page
 
   Scenario: try Sign (fail flow)
     Given I am on the sign page
-    When I enters "volf" in the "login" field
+    When I enters "volferme" in the "login" field
     And I enters "volf" in the "password" field
     And I clicks the "Зареєструватись" button
     Then Me must see "Таке ім'я вже зареєстроване" on the page
