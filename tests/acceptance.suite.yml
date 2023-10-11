@@ -1,0 +1,44 @@
+# Codeception Test Suite Configuration
+#
+# Suite for acceptance tests.
+# Perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+actor: AcceptanceTester
+modules:
+  enabled:
+    - WebDriver
+    - \Helper\Acceptance
+    - Asserts
+
+env:
+  # https://codeception.com/docs/modules/WebDriver#ChromeDriver
+  chrome:
+    modules:
+      config:
+        WebDriver:
+          url: 'http://tester'
+          window_size: false # disabled in ChromeDriver
+          port: 9515
+          restart: true
+          clear_cookies: true
+          browser: chrome
+          capabilities:
+            chromeOptions: # additional chrome options
+              args: [ "--disable-web-security","--start-fullscreen","--disable-translate","--disable-translate-new-ux","--no-sandbox","--headless","window-size=1450,2000","--disable-infobars","--lang=en" ]
+gherkin:
+  contexts:
+    default:
+      - AcceptanceTester
+    tag:
+      login:
+        - Step\Acceptance\LoginTester
+      sign:
+        - Step\Acceptance\SignTester
+      createnote:
+          - Step\Acceptance\CreatenoteTester
+extensions:
+  enabled:
+    - Codeception\Extension\RunProcess:
+        - rm -rf tests/_output/*
+step_decorators: ~
